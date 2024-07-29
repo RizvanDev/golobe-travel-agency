@@ -1,0 +1,44 @@
+@use '/src/globalStyles/variables.scss' as *;
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 21px 0;
+  z-index: 2;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.linksContainer {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $neutrals;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.signUpBtn {
+  padding: 16px 24px;
+  border-radius: 8px;
+  background-color: $neutrals;
+  color: $blackish-green;
+}

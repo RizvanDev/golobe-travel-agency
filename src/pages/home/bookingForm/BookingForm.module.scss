@@ -1,0 +1,46 @@
+@use '/src/globalStyles/variables.scss' as *;
+
+.booking {
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1260px;
+  height: 500px;
+  padding: 16px 16px 32px 32px;
+  background-color: $neutrals;
+  border-radius: 16px;
+  z-index: 999;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 32px 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  &:nth-child(1) {
+    border-right: 1px solid #6666;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 4px;
+    background-color: transparent;
+    transition: background-color 0.2s ease-in 0s;
+  }
+  &.activeTab::before {
+    background-color: $mint-green;
+  }
+}
