@@ -70,6 +70,8 @@ const FlightsBooking = () => {
   }
 
   const filteringFlights = query => {
+    const lowerQuery = query.toLowerCase()
+
     const oppositeFlight =
       query === selectedFlight.departureFlight
         ? selectedFlight.arrivalFlight
@@ -77,8 +79,13 @@ const FlightsBooking = () => {
 
     return flights.filter(flight => {
       const concatValue = `${flight.country}, ${flight.city} ${flight.code}`
+      const isSelected = concatValue !== oppositeFlight
+      const matchesQuery =
+        flight.country.toLowerCase().includes(lowerQuery) ||
+        flight.city.toLowerCase().includes(lowerQuery) ||
+        flight.code.toLowerCase().includes(lowerQuery)
 
-      return !(concatValue === oppositeFlight) && flight
+      return isSelected && matchesQuery
     })
   }
 
