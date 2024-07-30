@@ -69,37 +69,18 @@ const FlightsBooking = () => {
     }
   }
 
-  const filterDepartureFlights = () => {
-    return flights.filter(flight => {
-      const query = selectedFlight.departureFlight.toLowerCase()
-      const isSelected =
-        `${flight.country}, ${flight.city} ${flight.code}` !== selectedFlight.arrivalFlight
+  const filteringFlights = query => {
+    const oppositeFlight =
+      query === selectedFlight.departureFlight
+        ? selectedFlight.arrivalFlight
+        : selectedFlight.departureFlight
 
-      return (
-        isSelected &&
-        (flight.country.toLowerCase().includes(query) ||
-          flight.city.toLowerCase().includes(query) ||
-          flight.code.toLowerCase().includes(query))
-      )
+    return flights.filter(flight => {
+      const concatValue = `${flight.country}, ${flight.city} ${flight.code}`
+
+      return !(concatValue === oppositeFlight) && flight
     })
   }
-
-  const filterArrivalFlights = () => {
-    return flights.filter(flight => {
-      const query = selectedFlight.arrivalFlight.toLowerCase()
-      const isSelected =
-        `${flight.country}, ${flight.city} ${flight.code}` !== selectedFlight.departureFlight
-
-      return (
-        isSelected &&
-        (flight.country.toLowerCase().includes(query) ||
-          flight.city.toLowerCase().includes(query) ||
-          flight.code.toLowerCase().includes(query))
-      )
-    })
-  }
-
-  const listeningWords = () => {}
 
   useEffect(() => {
     const handleClickOutside = e => {
@@ -136,12 +117,14 @@ const FlightsBooking = () => {
 
         {isFocusedField.departure && (
           <FlightLists
-            flights={filterDepartureFlights}
+            flights={filteringFlights}
             handleClickFlight={handleClickDepartureFlight}
+            query={selectedFlight.departureFlight}
           />
         )}
       </div>
 
+      {/* swap btn */}
       <button
         type='button'
         className={styles.swap}
@@ -166,8 +149,9 @@ const FlightsBooking = () => {
 
         {isFocusedField.arrival && (
           <FlightLists
-            flights={filterArrivalFlights}
+            flights={filteringFlights}
             handleClickFlight={handleClickArrivalFlight}
+            query={selectedFlight.arrivalFlight}
           />
         )}
       </div>

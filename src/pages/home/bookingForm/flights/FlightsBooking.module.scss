@@ -114,6 +114,13 @@
   opacity: 0.6;
 }
 
+.letter {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  color: $slamon;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
