@@ -17,23 +17,30 @@ const FlightLists = ({ flights, handleClickFlight, query }) => {
     )
   }
 
+  const airports = flights(query)
+
   return (
     <ul className={styles.dataList}>
-      {flights(query).map(airport => {
-        return (
-          <li
-            key={airport.code}
-            className={styles.dataItem}
-            onClick={() => handleClickFlight(airport)}>
-            <span className={styles.dataItemText1}>
-              {highlightingLetter(airport.city, query)} ({highlightingLetter(airport.code, query)})
-            </span>
-            <span className={styles.dataItemText2}>
-              {highlightingLetter(airport.country, query)}
-            </span>
-          </li>
-        )
-      })}
+      {airports.length > 0 ? (
+        airports.map(airport => {
+          return (
+            <li
+              key={airport.code}
+              className={styles.dataItem}
+              onClick={() => handleClickFlight(airport)}>
+              <span className={styles.dataItemText1}>
+                {highlightingLetter(airport.city, query)} ({highlightingLetter(airport.code, query)}
+                )
+              </span>
+              <span className={styles.dataItemText2}>
+                {highlightingLetter(airport.country, query)}
+              </span>
+            </li>
+          )
+        })
+      ) : (
+        <li className={styles.noResults}>No search results</li>
+      )}
     </ul>
   )
 }
